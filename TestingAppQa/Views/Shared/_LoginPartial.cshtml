@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<div class="header-left">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="dropdown for-notification">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>
+        </div>
+
+        <div class="user-area dropdown float-right">
+            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="user-avatar rounded-circle" src="~/Images/admin.jpg" alt="User Avatar">
+            </a>
+
+            <div class="user-menu dropdown-menu">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa- user"></i>My Profile</a>
+
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-dark"> <a class="nav-link"><i class="fa fa-power -off"></i>Logout</a></button>
+                </form>
+            </div>
+
+
+            
+        </div>
+    }
+    else
+    {
+        <div class="dropdown for-notification">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </div>
+
+        <div class="dropdown for-notification">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </div>
+    }
+</div>
